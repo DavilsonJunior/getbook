@@ -72,14 +72,67 @@ class livrosController extends controller {
 
     $data = $dao->findById($id);    
 
+    $titulo = filter_input(INPUT_POST, 'titulo');
+    $autor = filter_input(INPUT_POST, 'autor');
+    $paginas = filter_input(INPUT_POST, 'paginas');
+    $descricao = filter_input(INPUT_POST, 'descricao');
+
+    if($titulo && $autor  &&  $paginas  && $descricao) {
+      if(isset($_FILES['arquivo']) && !empty($_FILES['arquivo']['tmp_name'])) {
+      
+        
+        $permitidos = array('image/jpeg', 'image/jpg', 'image/png');
+
+        //$file = $_FILES['arquivo'];
+        $nome = '';
+        if(in_array($_FILES['arquivo']['type'], $permitidos)) {
+          $nome = md5(time().rand(0, 999)).'.jpg';        
+        }
+
+        $l = new Livros();
+        $conn = $l->getConnection();
+
+        $dao = new LivrosDaoMysql($conn);
+
+        $l->setId($id);
+        $l->setTitulo($titulo);
+        $l->setAutor($autor);
+        $l->setPaginas($paginas);
+        $l->setDescricao($descricao);
+        $l->setUrl($nome);
+
+        $data = $dao->update($l);
+
+        if(isset($_FILES['arquivo']) && !empty($_FILES['arquivo']['tmp_name'])) { 
+          if($data) {
+            move_uploaded_file($_FILES['arquivo']['tmp_name'], 'upload/'.$nome);
+          }
+        }
+
+        echo '<div class="alert alert-success" role="alert">
+          Livro atualizado com sucesso!
+        </div>';
+      }
+
+        
+    } else {
+
     $this->loadTemplate('editar-livros', $data);
+    }
   }
 
   function deletar($id) {
     $data = [];
 
-    $data = $id;
+    $l = new Livros();
+    $conn = $l->getConnection();
 
-    $this->loadTemplate('adicionar-livros', $data);
+    $dao = new LivrosDaoMysql($conn);
+
+    $dao->delete($id);
+
+    $data = $dao->findAll();
+
+    $this->loadTemplate('livros', $data);
   }
 }

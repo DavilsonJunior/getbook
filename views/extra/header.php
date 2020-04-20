@@ -1,8 +1,14 @@
+<?php 
+$selecionado = ['home'];
+if(isset($_GET['url'])){
+  $selecionado = explode("/", $_GET['url']);
+} 
+?>
 <div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar" class="active">
 				<h1><a href="home" class="logo">GET</a></h1>
         <ul class="list-unstyled components mb-5">
-          <li class="active">
+          <li class="active">            
             <a href="<?= BASE_URL; ?>home"><span class="fa fa-home"></span> Home</a>
           </li>
           <li>
@@ -39,22 +45,22 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item <?= ($selecionado[0] === 'home')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>home">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($selecionado[0] === 'livros')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>livros">Livros</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($selecionado[0] === 'grafico')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>grafico">Gráfico</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($selecionado[0] === 'calendario')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>calendario">Calendário</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($selecionado[0] === 'login')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>login">Login</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($selecionado[0] === 'sair')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>sair">Sair</a>
                 </li>
               </ul>

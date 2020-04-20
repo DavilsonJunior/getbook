@@ -40,7 +40,7 @@ class LivrosDaoMysql implements LivrosDao {
     livros.descricao, 
     livros.url,
     votos.votos
-    FROM livros INNER JOIN votos ON (votos.id_livro = livros.id)");
+    FROM livros INNER JOIN votos ON (votos.id_livro = livros.id) ORDER BY id DESC");
     if($sql->rowCount() > 0) {
       $data = $sql->fetchAll();
       
@@ -99,12 +99,14 @@ class LivrosDaoMysql implements LivrosDao {
   }
 
   public function update(Livros $l){
-    $sql = "UPDATE livros SET titulo = :titulo, paginas = :paginas, descricao = :descricao, url = :url";
+    $sql = "UPDATE livros SET titulo = :titulo, autor = :autor, paginas = :paginas, descricao = :descricao, url = :url WHERE id = :id";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":titulo", $l->getTitulo());
+    $sql->bindValue(":autor", $l->getAutor());
     $sql->bindValue(":paginas", $l->getPaginas());
     $sql->bindValue(":descricao", $l->getDescricao());
     $sql->bindValue(":url", $l->getUrl());
+    $sql->bindValue(":id", $l->getId());
     $sql->execute();
 
     return true;

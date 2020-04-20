@@ -2,7 +2,7 @@
     
     <h1 class="my-3">Editar um livro</h1>
     <?php  foreach($viewData as $item): ?>
-    <form action="<?= BASE_URL ?>livros/adicionar" id="form-livro-editar" method="POST" enctype="multipart/form-data" class="col s12">  
+    <form id="form-livro-editar" method="POST" enctype="multipart/form-data" class="col s12">  
          
       <input class="form-control" id="id" name="id" type="hidden" value="<?= $item->getId(); ?>">
 
@@ -39,8 +39,8 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="form-group col-lg-5 col-md-8 col-sm-9 col-11 p-0">
+      <div class="row mb-3">
+        <div id="foto" class="form-group col-lg-5 col-md-8 col-sm-9 col-11 p-0">
           <img style="width: 200px;" src="<?= BASE_URL ?>upload/<?= $item->getUrl() ?>">
         </div>
       </div>

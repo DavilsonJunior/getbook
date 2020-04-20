@@ -54,8 +54,15 @@ $(document).ready(function(){
         data: formData,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+          var caminho = BASE_URL+'assets/images/spin-preloader.gif';
+          $('.retorno').html('<img src="'+caminho+'">');          
+        },
         success: function(response) {
           $('.retorno').html(response);
+          setTimeout(() => {
+            window.location.href = BASE_URL+'livros';
+          }, 1500);
         }
       });
     }
@@ -65,6 +72,8 @@ $(document).ready(function(){
   $('#form-livro-editar').on('submit', function(e){
     e.preventDefault();
 
+    var id = document.getElementById("id").value;
+
     var formulario = document.getElementById('form-livro-editar');
 
     var formData = new FormData(formulario);
@@ -73,18 +82,68 @@ $(document).ready(function(){
 
     if(arquivos.length > 0) {
 
+      //formData.append('arquivo', arquivos[0]);
+
       $.ajax({
         type: 'POST',
-        url: BASE_URL+'livros/editar',
+        url: BASE_URL+'livros/editar/'+id,
         data: formData,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+          var caminho = BASE_URL+'assets/images/spin-preloader.gif';
+          $('.retorno').html('<img src="'+caminho+'">');          
+        },
         success: function(response) {
           $('.retorno').html(response);
+          setTimeout(() => {
+            window.location.href = BASE_URL+'livros';
+          }, 1500);
         }
       });
     }
   })
+
+
+
+
+  
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*$('.nav li').click(function(e) {
+    $('.nav li').removeClass('active');
+    var $this = $(this);
+    if (!$this.hasClass('active')) {
+        $this.addClass('active');
+    }
+    e.preventDefault();
+  });*/
   
   /*
   beforeSend: function() {
@@ -116,4 +175,3 @@ $(document).ready(function(){
     });
   })
   */
-})
