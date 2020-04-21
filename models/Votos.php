@@ -1,5 +1,5 @@
 <?php
-class Livros extends model {
+class Votos extends model {
 
   private $id;
   private $titulo;
@@ -61,11 +61,11 @@ class Livros extends model {
   }
 }
 
-interface LivrosDao {
-  public function create(Votos $l);
+interface VotosDao {
+  public function create(Votos $v);
   public function findAll();
   public function findById($id);
   public function findByTitulo($titulo);
-  public function update(Votos $l);
+  public function update(Votos $v);
   public function delete($id);
 }

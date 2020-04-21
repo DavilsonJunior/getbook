@@ -1,5 +1,5 @@
 <div class="container">
- <h1 class="my-2">Todos os livros cadastrados</h1>
+ <h1 class="my-2 text-muted">Todos os livros cadastrados</h1>
   
   <div class="lista row justify-content-center">
     <div class="col-lg-10 p-md-0 p-3 p-sm-0 row justify-content-start">

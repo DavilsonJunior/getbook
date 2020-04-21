@@ -3,7 +3,12 @@ class graficoController extends controller {
   function index() {
     $data = [];
 
-    SELECT votos.votos, votos.titulo FROM votos ORDER BY votos DESC LIMIT 5
+    $v = new Votos();
+    $conn = $v->getConnection();
+
+    $dao = new VotosDaoMysql($conn);
+
+    $data = $dao->findAll();
 
     $this->loadTemplate('grafico', $data);
   }

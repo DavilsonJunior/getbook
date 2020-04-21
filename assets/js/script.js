@@ -23,6 +23,32 @@ $(document).ready(function(){
   });
 
   const BASE_URL = 'http://localhost/projetos_reais/getbook/';
+  var imagem = '<img class="img" src="../images/spin-preloader.gif" />';
+
+  /* buscando livro da pesquisa */
+  $('#form-home').on('submit', function(e){
+    e.preventDefault();
+
+      var pesquisa = $('#pesquisa').val();
+
+      $.ajax({
+        type: 'POST',
+        url: BASE_URL+'detalhes',
+        data: { pesquisa },
+        beforeSend: function() {
+          var caminho = BASE_URL+'assets/images/spin-preloader.gif';
+          //$('.search').html(imagem); 
+          $('#modal').find('.modal-body').html(imagem);
+          $('#modal').modal('show');         
+        },
+        success: function(response) {
+          setTimeout(() => {
+            window.location.href = BASE_URL+'home';
+          }, 1500);
+        }
+      });
+  })
+
 
   /*  mostrando arquivo selecionao no pra upload */
   $('#arquivo').change(function(){
