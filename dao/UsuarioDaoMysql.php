@@ -35,7 +35,7 @@ class UsuarioDaoMysql implements UsuarioDao {
     return $dados;
   }
   public function findByEmail($email){
-    $dados = [];
+    $array = [];
     $sql = "SELECT * FROM usuarios WHERE email = :email";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":email", $email);
@@ -43,10 +43,10 @@ class UsuarioDaoMysql implements UsuarioDao {
 
     if($sql->rowCount() > 0) {
       $dados = $sql->fetch();
-      return $dados;
+      $array['id'] = $dados['id'];
     }
 
-    return $dados;
+    return $array;
   }
 
   public function login(Usuario $u) {

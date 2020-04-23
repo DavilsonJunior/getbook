@@ -14,18 +14,24 @@ if(isset($_GET['url'])){
           <li>
               <a href="<?= BASE_URL; ?>livros"><span class="fa fa-book"></span> Livros</a>
           </li>
+          <?php if(isset($_SESSION['logado'])): ?>
           <li>
             <a href="<?= BASE_URL; ?>grafico"><span class="fa fa-signal"></span> Gráfico</a>
-          </li>
+          </li>          
           <li>
             <a href="<?= BASE_URL; ?>calendario"><span class="fa fa-calendar"></span> Calendar</a>
           </li>
+          <?php endif; ?>
+          <?php if(!isset($_SESSION['logado'])): ?>
           <li>
             <a href="<?= BASE_URL; ?>login"><span class="fa fa-envelope"></span> login</a>
           </li>
-          <li>
-            <a href="<?= BASE_URL; ?>sair"><span class="fa fa-power-off"></span> Sair</a>
+          <?php endif; ?>
+          <?php if(isset($_SESSION['logado'])): ?>
+          <li>            
+            <a href="<?= BASE_URL; ?>sair.php"><span class="fa fa-power-off"></span> Sair</a>
           </li>
+          <?php endif; ?>
         </ul>
     	</nav>
 
@@ -51,18 +57,24 @@ if(isset($_GET['url'])){
                 <li class="nav-item <?= ($selecionado[0] === 'livros')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>livros">Livros</a>
                 </li>
+                <?php if(isset($_SESSION['logado'])): ?>
                 <li class="nav-item <?= ($selecionado[0] === 'grafico')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>grafico">Gráfico</a>
                 </li>
                 <li class="nav-item <?= ($selecionado[0] === 'calendario')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>calendario">Calendário</a>
                 </li>
+                <?php endif; ?>
+                <?php if(!isset($_SESSION['logado'])): ?>
                 <li class="nav-item <?= ($selecionado[0] === 'login')?'active':''?>">
                     <a class="nav-link" href="<?= BASE_URL; ?>login">Login</a>
                 </li>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['logado'])): ?>
                 <li class="nav-item <?= ($selecionado[0] === 'sair')?'active':''?>">
-                    <a class="nav-link" href="<?= BASE_URL; ?>sair">Sair</a>
+                    <a class="nav-link" href="<?= BASE_URL; ?>sair.php">Sair</a>
                 </li>
+                <?php endif; ?>
               </ul>
             </div>
           </div>

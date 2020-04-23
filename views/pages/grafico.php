@@ -9,8 +9,7 @@ function cutNameTitulo($titulo) {
       if($count <= 1) {
         $nome .= " ".$titulo[$count];
       }
-  }
-  
+  }  
     echo $nome;
   }
 
@@ -62,7 +61,7 @@ window.onload = function(){
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
-                data: [<?= implode(',', $votos) ?>]
+                data: [<?= implode(',', $votos) ?>],
             }]
         },
 

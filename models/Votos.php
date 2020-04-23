@@ -66,6 +66,6 @@ interface VotosDao {
   public function findAll();
   public function findById($id);
   public function findByTitulo($titulo);
-  public function update(Votos $v);
+  public function update($id);
   public function delete($id);
 }

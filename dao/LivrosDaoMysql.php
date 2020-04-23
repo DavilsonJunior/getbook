@@ -62,41 +62,78 @@ class LivrosDaoMysql implements LivrosDao {
   }
   public function findById($id){
     $array = [];
-    $sql = "SELECT * FROM livros WHERE id = :id";
+    $sql = "SELECT
+    L.id, 
+    L.titulo, 
+    L.autor, 
+    L.paginas, 
+    L.descricao, 
+    L.url,
+    V.votos FROM livros L INNER JOIN votos V ON (V.id_livro = L.id) WHERE L.id = :id ";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":id", $id);
     $sql->execute();
 
     if($sql->rowCount() > 0) {
-      $dado = $sql->fetch();
+      $item = $sql->fetch();
 
       $l = new Livros();
 
-      $l->setId($dado['id']);
-      $l->setAutor($dado['autor']);
-      $l->setPaginas($dado['paginas']);
-      $l->setDescricao($dado['descricao']);
-      $l->setUrl($dado['url']);
-      $l->setTitulo($dado['titulo']);
+      $l->setId($item['id']);
+      $l->setAutor($item['autor']);
+      $l->setPaginas($item['paginas']);
+      $l->setDescricao($item['descricao']);
+      $l->setUrl($item['url']);
+      $l->setTitulo($item['titulo']);
+      $l->setVotos($item['votos']);
       $array[] = $l;
     }
 
     return $array;
   }
-  public function findByTitulo($titulo){
-    $dados = [];
-    $sql = "SELECT * FROM usuarios WHERE titulo = :titulo";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":titulo", $titulo);
-    $sql->execute();
+  public function findByTitulo($busca){
+    $array = [];
+    if($busca !== "") {
+      $busca = "%{$busca}%";
+      $sql = "SELECT 
+      L.id, 
+      L.titulo, 
+      L.autor, 
+      L.paginas, 
+      L.descricao, 
+      L.url,
+      V.votos FROM livros L INNER JOIN votos V ON (V.id_livro = L.id)";
+      if($busca !== '') {
+        $sql .= " WHERE L.titulo LIKE :busca OR L.autor LIKE :busca";
+      }
+        $sql = $this->db->prepare($sql);
+      if($busca !== '') {
+        $sql->bindValue(":busca", $busca);
+      }
 
-    if($sql->rowCount() > 0) {
-      $dados = $sql->fetch();
-      return $dados;
+      //var_dump($sql);
+      
+      $sql->execute();
+
+      if($sql->rowCount() > 0) {
+        $data = $sql->fetchAll();
+        
+        foreach($data as $item) {
+          $l = new Livros();
+          $l->setId($item['id']);
+          $l->setTitulo($item['titulo']);
+          $l->setAutor($item['autor']);
+          $l->setPaginas($item['paginas']);
+          $l->setDescricao($item['descricao']);
+          $l->setUrl($item['url']);
+          $l->setVotos($item['votos']);
+
+          $array[] = $l;
+      }    
     }
-
-    return $dados;
   }
+  return $array;
+}
 
   public function update(Livros $l){
     $sql = "UPDATE livros SET titulo = :titulo, autor = :autor, paginas = :paginas, descricao = :descricao, url = :url WHERE id = :id";
@@ -113,7 +150,11 @@ class LivrosDaoMysql implements LivrosDao {
   }
   public function delete($id){
     $sql = $this->db->prepare("DELETE FROM livros WHERE id = :id");
-    $sql->bindValue("id", $id);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    $sql = $this->db->prepare("DELETE FROM votos WHERE id_livro = :id");
+    $sql->bindValue(":id", $id);
     $sql->execute();
 
     return true;

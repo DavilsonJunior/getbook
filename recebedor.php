@@ -24,19 +24,19 @@ echo $titulo;*/
 //     echo $nome;
 // }
 
-function reduceTitulo($titulo) {
-  $titulo = explode(" ", $titulo);
-  $lenght = sizeof($titulo);
-  $nome = $titulo[0];
-  for($count=1;$count<$lenght;$count++) {
+// function reduceTitulo($titulo) {
+//   $titulo = explode(" ", $titulo);
+//   $lenght = sizeof($titulo);
+//   $nome = $titulo[0];
+//   for($count=1;$count<$lenght;$count++) {
       
-    if($count <= 1) {
-      $nome .= " ".$titulo[$count];
-    }
-}
+//     if($count <= 1) {
+//       $nome .= " ".$titulo[$count];
+//     }
+// }
 
-  echo $nome;
-}
+//   echo $nome;
+// }
 
-$titulo = 'Harry potter e a pedra filosofal';
-reduceTitulo($titulo);
+// $titulo = 'Harry potter e a pedra filosofal';
+// reduceTitulo($titulo);

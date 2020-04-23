@@ -86,14 +86,25 @@ class VotosDaoMysql implements VotosDao {
     return $dados;
   }
 
-  public function update(Votos $v){
-    $sql = "UPDATE Votos SET votos.votos = :votos WHERE id = :id";
+  public function update($id){
+    $sql = $this->db->prepare("SELECT * FROM votos WHERE id_livro = :id");
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    if($sql->rowCount() > 0) {
+      $dado = $sql->fetch(); 
+      $dado = $dado['votos'] + 1;
+
+    $sql = "UPDATE votos SET votos = :votos WHERE id_livro = :id";
     $sql = $this->db->prepare($sql);
-    $sql->bindValue(":votos", $v->getVotos());
-    $sql->bindValue(":id", $v->getId());
+    $sql->bindValue(":votos", $dado);
+    $sql->bindValue(":id", $id);
     $sql->execute();
 
     return true;
+    } else {
+      return false;
+    }
   }
   public function delete($id){
     $sql = $this->db->prepare("DELETE FROM livros WHERE id = :id");

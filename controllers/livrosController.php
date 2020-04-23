@@ -13,6 +13,25 @@ class livrosController extends controller {
     $this->loadTemplate('livros', $data);
   }
 
+  function pesquisa() {
+    $data = [];
+
+    $pesquisa = filter_input(INPUT_POST, 'pesquisa');
+
+    if($pesquisa) {
+    $l = new Livros();
+    $conn = $l->getConnection();
+
+    $dao = new LivrosDaoMysql($conn);
+
+    $data = $dao->findByTitulo($pesquisa);
+
+    $this->loadTemplate('livros', $data);
+  } else {
+    $this->loadTemplate('livros', $data);
+  } 
+}
+
   function adicionar() {
     $data = [];
 
@@ -134,5 +153,34 @@ class livrosController extends controller {
     $data = $dao->findAll();
 
     $this->loadTemplate('livros', $data);
+  }
+
+  function detalhes($id) {
+    $data = [];
+
+    $l = new Livros();
+    $conn = $l->getConnection();
+  
+    $dao = new LivrosDaoMysql($conn);
+  
+    $data = $dao->findById($id);
+  
+    $this->loadTemplate('detalhes', $data);
+      
+  }
+
+  function votar($id) {
+    $data = [];
+
+    $v = new Votos();
+    $conn = $v->getConnection();
+  
+    $dao = new VotosDaoMysql($conn);
+  
+    $data = $dao->update($id);
+  
+    $caminho = BASE_URL."livros/detalhes/".$id;
+    header("Location: " . $caminho);
+      
   }
 }
