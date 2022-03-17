@@ -26,3 +26,11 @@
 # Tela mostrando o grafico dos livros mais votados e porcentagem.
 # Tela mostrando um calendario do dia do voto.
 
+<p align="center">
+  <img width="800" src="https://user-images.githubusercontent.com/35976070/158717254-89bf99bd-ff25-4c0c-8c65-b68900233a5f.png"/>
+</p>
+
+## Tecnologies
+
+1. PHP
+
