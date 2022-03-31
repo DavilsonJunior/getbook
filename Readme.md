@@ -27,4 +27,5 @@ Projeto desenvolvido em PHP para pesquisa e votos de livros. O sistema permite c
 4. Javascript
 5. SQL
 6. MySQL
+7. Chart
 
