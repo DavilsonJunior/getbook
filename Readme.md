@@ -1,36 +1,30 @@
-# ######################## #
-#     Google dos livros    #     
-# ######################## #
-
-***********************
- Requisitos Funcionais
-***********************
-
-# O Sistema devera ter uma tela inicial igual a do google
-# O Sistema deve permitir a busca do livro ou autor no banco de dados, se encontrado mostrar em uma tela alguns dados do livro como: 
-      * Imagem
-      * nome
-      * autor
-      * numero de paginas
-      * media
-      * voto
-# O sistema deve permitir com que o usuario vote anonimamente nos livros, sendo contabilizado a media de todos os votos, bem como a quantidade total de votos.
-# O sistema sera alimentado pela propria equipe, em um painel de controle que servira apenas para gerenciar os liovros cadastrados e seus dados.       
-
-*******
- Telas
-*******
-
-# Tela 1: Um campo de texto no meio da tela igual ao do google.
-# Tela Mostrando resultados da pesquisa.
-# Tela mostrando o grafico dos livros mais votados e porcentagem.
-# Tela mostrando um calendario do dia do voto.
-
 <p align="center">
+  <a href="ref"><img src="https://user-images.githubusercontent.com/35976070/161137407-888e8d2b-f91d-49f6-947b-14480615e8e2.png" width="200" style="border-radius: 50px;"></a>
+</p>
+
+<h1 align="center">
+  Google dos livros
+</h1>
+
+Projeto desenvolvido em PHP para pesquisa e votos de livros. O sistema permite cadastro, edição e remoção de livros ou autor no banco de dados,
+
+## Instalação
+
+É necessário rodar um servidor em **PHP** para funcionar o sistema. Usando o Xampp é possivel rodar um servidor PHP Localmente
+
+[XAMPP](https://www.apachefriends.org/pt_br/index.html)
+ 
+## Layout inicial
+<p>
   <img width="800" src="https://user-images.githubusercontent.com/35976070/158717254-89bf99bd-ff25-4c0c-8c65-b68900233a5f.png"/>
 </p>
 
 ## Tecnologies
 
 1. PHP
+2. Bootstrap
+3. JQuery
+4. Javascript
+5. SQL
+6. MySQL
 
