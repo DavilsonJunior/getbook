@@ -29,3 +29,10 @@ Projeto desenvolvido em PHP para pesquisa e votos de livros. O sistema permite c
 6. MySQL
 7. Chart
 
+## Padrões de projeto
+
+1. MVC
+2. DAO
+3. Depency Inversion
+
+
